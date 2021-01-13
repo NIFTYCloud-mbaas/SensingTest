@@ -44,6 +44,12 @@ function acce_stop() {
     document.getElementById("color").src = "js/img/white.png";
 }
 
+// Make sure device ready: https://docs.monaca.io/en/reference/cordova_6.5/geolocation/
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    console.log("Cordova is ready!");
+}
+
 // ＧＰＳセンサーStartボタン押下時の処理
 function gps_start() {
     gps_flag = true;
@@ -165,6 +171,10 @@ var onGeoError = function (error) {
 
 // ＧＰＳセンサーから位置情報をする時に設定するオプション
 var geoOption = {
+    // Provides a hint that the application needs the best possible results.
+    // By default, the device attempts to retrieve a Position using network-based methods.
+    // Setting this property to true tells the framework to use more accurate methods, such as satellite positioning. (Boolean)
+    enableHighAccuracy: true,
     // 取得する間隔を１秒に設定
     frequency: 1000,
     // 6秒以内に取得できない場合はonGeoErrorコールバックに渡すよう設定
